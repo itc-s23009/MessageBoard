@@ -31,8 +31,18 @@ class UserService(
     }
 
     @Transactional
+    fun findById(id: Long): Users? {
+        println("Finding user by id: $id")
+        return usersRepository.findById(id)
+    }
+
+    @Transactional
     fun delete(id: Long) {
         println("Deleting user with id: $id")
         return usersRepository.deleteUser(id)
+    }
+
+    fun find(id: Long): Users {
+        return usersRepository.findById(id) ?: throw Exception("User not found")
     }
 }
