@@ -21,7 +21,7 @@ class UserController(
     @ResponseStatus(HttpStatus.CREATED)
     fun register(@RequestBody request: UserRegisterRequest) {
         println("Registering user: ${request.email}")
-        userService.register(request.email, request.viewName,request.password)
+        userService.register(request.viewName, request.email, request.password)
     }
 
     @PostMapping("/login")
@@ -33,5 +33,10 @@ class UserController(
         SecurityContextHolder.getContext().authentication = authentication
         println("User authenticated: ${request.email}")
         return authentication
+    }
+
+    @DeleteMapping("/delete/{users_id}")
+    fun userDelete(@PathVariable users_id: Long) {
+        userService.delete(users_id)
     }
 }
